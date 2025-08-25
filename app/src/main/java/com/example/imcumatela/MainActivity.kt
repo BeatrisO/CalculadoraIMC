@@ -16,13 +16,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnClicar: Button
     private lateinit var textViewResultado: TextView
 
-    fun configurarComponentes() {
-        editTextPeso = findViewById(R.id.editText_Peso)
-        editTextAltura = findViewById(R.id.editText_Altura)
-        btnClicar = findViewById(R.id.btn_calcular)
-        textViewResultado = findViewById(R.id.textView_resultado)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -50,6 +43,13 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    fun configurarComponentes() {
+        editTextPeso = findViewById(R.id.editText_Peso)
+        editTextAltura = findViewById(R.id.editText_Altura)
+        btnClicar = findViewById(R.id.btn_calcular)
+        textViewResultado = findViewById(R.id.textView_resultado)
     }
 
     fun validacaoPeso(): Boolean {
