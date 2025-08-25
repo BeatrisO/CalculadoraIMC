@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
 
         configurarComponentes()
         btnClicar.setOnClickListener {
-
             if (validacaoPeso()) {
                 editTextPeso.setError("Digite o peso")
             } else if (validacaoAltura()) {
@@ -52,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
     fun validacaoPeso(): Boolean {
         return editTextPeso.text.isEmpty()
     }
@@ -59,7 +59,6 @@ class MainActivity : AppCompatActivity() {
     fun validacaoAltura(): Boolean {
         return editTextAltura.text.isEmpty()
     }
-
 
     fun calcular(peso: Double, altura: Double): Double {
         return peso / (altura * altura)
@@ -79,7 +78,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             return "Obesidade grau III"
         }
-
     }
 }
 
