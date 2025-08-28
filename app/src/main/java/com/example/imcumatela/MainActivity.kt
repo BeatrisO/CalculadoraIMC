@@ -1,63 +1,48 @@
 package com.example.imcumatela
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.imcumatela.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var editTextPeso: EditText
-    private lateinit var editTextAltura: EditText
-    private lateinit var btnClicar: Button
-    private lateinit var textViewResultado: TextView
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        configurarComponentes()
-        btnClicar.setOnClickListener {
+        binding.btnCalcular.setOnClickListener {
             if (validacaoPeso()) {
-                editTextPeso.setError("Digite o peso")
+                binding.editTextPeso.error = "Digite o peso"
             } else if (validacaoAltura()) {
-                editTextAltura.setError("Digite a altura")
+                binding.editTextAltura.error = "Digite a altura"
             } else {
-                val peso = editTextPeso.text.toString().toDouble()
-                val altura = editTextAltura.text.toString().toDouble()
+                val peso = binding.editTextPeso.text.toString().toDouble()
+                val altura = binding.editTextAltura.text.toString().toDouble()
                 val imc = calcular(peso, altura)
                 val categoria = classificarIMC(imc)
-                textViewResultado.text = categoria
+                binding.textViewResultado.text = categoria
             }
-
         }
-
-    }
-
-    fun configurarComponentes() {
-        editTextPeso = findViewById(R.id.editText_Peso)
-        editTextAltura = findViewById(R.id.editText_Altura)
-        btnClicar = findViewById(R.id.btn_calcular)
-        textViewResultado = findViewById(R.id.textView_resultado)
     }
 
     fun validacaoPeso(): Boolean {
-        return editTextPeso.text.isEmpty()
+        return binding.editTextPeso.text.isNullOrEmpty()
     }
 
     fun validacaoAltura(): Boolean {
-        return editTextAltura.text.isEmpty()
+        return binding.editTextAltura.text.isNullOrEmpty()
     }
 
     fun calcular(peso: Double, altura: Double): Double {
