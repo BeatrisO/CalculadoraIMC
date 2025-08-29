@@ -1,5 +1,6 @@
 package com.example.imcumatela
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -32,11 +33,14 @@ class MainActivity : AppCompatActivity() {
                 val altura = binding.editTextAltura.text.toString().toDouble()
                 val imc = calcular(peso, altura)
                 val categoria = classificarIMC(imc)
-                binding.textViewResultado.text = categoria
+
+                val intent = Intent(this, ResultadoActivity::class.java)
+                intent.putExtra("IMC", imc)
+                intent.putExtra("CATEGORIA", categoria)
+                startActivity(intent)
             }
         }
     }
-
     fun validacaoPeso(): Boolean {
         return binding.editTextPeso.text.isNullOrEmpty()
     }
@@ -51,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     fun classificarIMC(imc: Double): String {
         if (imc < 18.5) {
-            return "Abaixo do peso"
+            return "Baixo peso"
         } else if (imc < 25.0) {
             return "Peso normal"
         } else if (imc < 30.0) {
