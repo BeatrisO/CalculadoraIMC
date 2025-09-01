@@ -54,19 +54,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun classificarIMC(imc: Double): String {
-        if (imc < 18.5) {
-            return "Baixo peso"
-        } else if (imc < 25.0) {
-            return "Peso normal"
-        } else if (imc < 30.0) {
-            return "Sobrepeso"
-        } else if (imc < 35.0) {
-            return "Obesidade grau I"
-        } else if (imc < 40.0) {
-            return "Obesidade grau II"
-        } else {
-            return "Obesidade grau III"
+        return when {
+            imc < 18.5 -> "Baixo peso"
+            imc < 25.0 -> "Peso normal"
+            imc < 30.0 -> "Sobrepeso"
+            else -> "Obesidade"
         }
     }
 }
+// #60AF9A baixo peso, #59A18E normal, #519180 sobrepeso, #417668 obesidade
 
