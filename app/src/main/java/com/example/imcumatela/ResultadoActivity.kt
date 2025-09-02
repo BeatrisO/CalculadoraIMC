@@ -5,6 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import android.view.MenuItem
 import com.example.imcumatela.databinding.ActivityResultadoBinding
 
 class ResultadoActivity : AppCompatActivity() {
@@ -21,9 +22,22 @@ class ResultadoActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         val categoria = intent.getStringExtra("CATEGORIA")
 
         binding.textViewResultado.text = categoria
+
+        supportActionBar?.apply {
+            title = "Calculadora de IMC"
+            setDisplayHomeAsUpEnabled(true)
+        }
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                super.onBackPressed()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 }
