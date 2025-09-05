@@ -23,21 +23,19 @@ class ResultadoActivity : AppCompatActivity() {
             insets
         }
         val categoria = intent.getStringExtra("CATEGORIA")
-
         binding.textViewResultado.text = categoria
 
-        supportActionBar?.apply {
-            title = "Calculadora de IMC"
-            setDisplayHomeAsUpEnabled(true)
-        }
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = ""
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             android.R.id.home -> {
-                super.onBackPressed()
-                return true
+                finish()
+                true
             }
-            else -> return super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }
