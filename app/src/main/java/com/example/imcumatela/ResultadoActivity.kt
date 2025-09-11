@@ -22,8 +22,11 @@ class ResultadoActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val imc = intent.getDoubleExtra("IMC", 0.0)
         val categoria = intent.getStringExtra("CATEGORIA")
-        binding.textViewResultado.text = categoria
+        val imcFormatado = "%.1f".format(imc)
+
+        binding.textViewResultado.text = "IMC: $imcFormatado\nClassificação: $categoria"
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
