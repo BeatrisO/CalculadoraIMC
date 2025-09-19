@@ -2,5 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="baixo_peso">#60AF9A</color>
+    <color name="normal">#59A18E</color>
+    <color name="sobrepeso">#519180</color>
+    <color name="obesidade">#417668</color>
 
 </resources>

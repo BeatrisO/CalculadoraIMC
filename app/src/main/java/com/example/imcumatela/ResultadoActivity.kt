@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.view.MenuItem
+import androidx.core.content.ContextCompat
 import com.example.imcumatela.databinding.ActivityResultadoBinding
 
 class ResultadoActivity : AppCompatActivity() {
@@ -27,6 +28,14 @@ class ResultadoActivity : AppCompatActivity() {
         val imcFormatado = "%.1f".format(imc)
 
         binding.textViewResultado.text = "IMC: $imcFormatado\nClassificação: $categoria"
+
+        val cor = when (categoria) {
+            "Baixo peso" -> ContextCompat.getColor(this, R.color.baixo_peso)
+            "Normal" -> ContextCompat.getColor(this, R.color.normal)
+            "Sobrepeso" -> ContextCompat.getColor(this, R.color.sobrepeso)
+            else -> ContextCompat.getColor(this, R.color.obesidade)
+        }
+        binding.caixaResultado.setCardBackgroundColor(cor)
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
