@@ -20,3 +20,10 @@ O usuário informa o peso e a altura, e o app exibe tanto o valor do IMC quanto 
 * Kotlin
 * Android Studio
 * ViewBinding
+
+### Melhorias Futuras
+
+* Tela de histórico de IMCs calculados 
+* Tema claro/escuro
+* Interface redesenhada com Jetpack Compose
+* Salvamento local com Room
