@@ -1,6 +1,7 @@
 package com.example.imcumatela
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -22,8 +23,10 @@ fun IMCScreen(onResultado: (Double, String) -> Unit) {
 
         if (pesoErro || alturaErro) return
 
-        val p = peso.toDouble()
-        val a = altura.toDouble()
+        val p = peso.replace(",", ".").toDouble()
+
+        val a = altura.replace(",", ".").toDouble()
+
         val imc = p / (a * a)
 
         val categoria = when {
@@ -48,7 +51,7 @@ fun IMCScreen(onResultado: (Double, String) -> Unit) {
             value = peso,
             onValueChange = { peso = it },
             label = { Text("Peso (kg)") },
-            keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = KeyboardType.Number),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             isError = pesoErro,
             modifier = Modifier.fillMaxWidth()
         )
@@ -59,7 +62,7 @@ fun IMCScreen(onResultado: (Double, String) -> Unit) {
             value = altura,
             onValueChange = { altura = it },
             label = { Text("Altura (m)") },
-            keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = KeyboardType.Number),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             isError = alturaErro,
             modifier = Modifier.fillMaxWidth()
         )

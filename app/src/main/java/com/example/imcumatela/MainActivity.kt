@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     composable("resultado/{imc}/{categoria}") { backStackEntry ->
-                        val imc = backStackEntry.arguments?.getString("imc")?.toDouble() ?: 0.0
+                        val imc = backStackEntry.arguments?.getString("imc")?.replace(",", ".")?.toDouble() ?: 0.0
                         val categoria = backStackEntry.arguments?.getString("categoria") ?: ""
 
                         ResultadoScreen(
