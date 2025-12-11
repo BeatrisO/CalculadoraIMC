@@ -6,6 +6,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
@@ -16,16 +17,36 @@ fun IMCScreen(onResultado: (Double, String) -> Unit) {
 
     var pesoErro by remember { mutableStateOf(false) }
     var alturaErro by remember { mutableStateOf(false) }
+    var mensagem by remember { mutableStateOf("") }
 
     fun calcular() {
         pesoErro = peso.isBlank()
         alturaErro = altura.isBlank()
+        mensagem = ""
 
-        if (pesoErro || alturaErro) return
+        if (pesoErro || alturaErro) {
+            mensagem = if (pesoErro) "Digite o peso" else "Digite a altura"
+            return
+        }
 
-        val p = peso.replace(",", ".").toDouble()
+        val pesoStr = peso.replace(",", ".")
+        val alturaStr = altura.replace(",", ".")
 
-        val a = altura.replace(",", ".").toDouble()
+        val p = pesoStr.toDoubleOrNull()
+        val aCm = alturaStr.toDoubleOrNull()
+
+        if (p == null) {
+            pesoErro = true
+            mensagem = "Peso inválido"
+            return
+        }
+        if (aCm == null) {
+            alturaErro = true
+            mensagem = "Altura inválida"
+            return
+        }
+
+        val a = aCm / 100.0
 
         val imc = p / (a * a)
 
@@ -49,8 +70,13 @@ fun IMCScreen(onResultado: (Double, String) -> Unit) {
 
         OutlinedTextField(
             value = peso,
-            onValueChange = { peso = it },
+            onValueChange = {
+                peso = it
+                pesoErro = false
+                mensagem = ""
+            },
             label = { Text("Peso (kg)") },
+            placeholder = { Text("ex: 65") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             isError = pesoErro,
             modifier = Modifier.fillMaxWidth()
@@ -60,14 +86,30 @@ fun IMCScreen(onResultado: (Double, String) -> Unit) {
 
         OutlinedTextField(
             value = altura,
-            onValueChange = { altura = it },
-            label = { Text("Altura (m)") },
+            onValueChange = {
+                altura = it
+                alturaErro = false
+                mensagem = ""
+            },
+            label = { Text("Altura (cm)") },
+            placeholder = { Text("ex: 170") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             isError = alturaErro,
             modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(12.dp))
+
+        if (mensagem.isNotEmpty()) {
+            Text(
+                text = mensagem,
+                color = if (alturaErro || pesoErro) Color.Red else Color.Gray,
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
 
         Button(
             onClick = { calcular() },
