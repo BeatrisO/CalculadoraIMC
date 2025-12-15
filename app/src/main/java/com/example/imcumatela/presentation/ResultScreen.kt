@@ -1,4 +1,4 @@
-package com.example.imcumatela
+package com.example.imcumatela.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Text
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import com.example.imcumatela.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,6 +45,7 @@ fun ResultadoScreen(imc: Double, categoria: String, onBack: () -> Unit) {
                     .padding(bottom = 20.dp),
                 contentScale = ContentScale.Fit
             )
+            Spacer(modifier = Modifier.height(32.dp))
 
             Card(
                 modifier = Modifier.fillMaxWidth(0.95f),
@@ -76,8 +78,12 @@ fun ResultadoScreen(imc: Double, categoria: String, onBack: () -> Unit) {
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            Button(onClick = onBack) {
-                Text("Voltar")
+            Button(
+                onClick = onBack,
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFA0EAB3))
+            ) {
+                Text("Voltar", color = Color.Black)
             }
         }
     }
