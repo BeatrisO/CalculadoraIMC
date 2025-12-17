@@ -1,4 +1,4 @@
-package com.example.imcumatela.presentation
+package com.example.imcumatela.presentation.imc
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -10,21 +10,27 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.imcumatela.IMCViewModel
+import com.example.imcumatela.presentation.result.ImcUiEvent
+import com.example.imcumatela.viewmodel.IMCViewModel
 
 @Composable
 fun IMCScreen(
     viewModel: IMCViewModel = viewModel(),
-    onResultado: (Double, String) -> Unit
+    onNavigateResultado: () -> Unit
 ) {
+    val state by viewModel.uiState.collectAsState()
 
-    val peso by viewModel.peso.collectAsState()
-    val altura by viewModel.altura.collectAsState()
-    val mensagem by viewModel.mensagem.collectAsState()
-    val pesoErro by viewModel.pesoErro.collectAsState()
-    val alturaErro by viewModel.alturaErro.collectAsState()
+     LaunchedEffect(Unit) {
+         viewModel.uiEvent.collect { event ->
+             when (event) {
+                 is ImcUiEvent.NavigateToResultado -> {
+                     onNavigateResultado()
+                 }
+             }
+         }
+     }
 
-    val textFieldBlackColors = OutlinedTextFieldDefaults.colors(
+     val textFieldBlackColors = OutlinedTextFieldDefaults.colors(
         focusedBorderColor = Color.Black,
         unfocusedBorderColor = Color.Black,
         cursorColor = Color.Black,
@@ -45,35 +51,35 @@ fun IMCScreen(
     ) {
 
         OutlinedTextField(
-            value = peso,
-            onValueChange = { viewModel.atualizarPeso(it) },
+            value = state.peso,
+            onValueChange = viewModel::atualizarPeso,
             label = { Text("Peso (kg)") },
             placeholder = { Text("ex: 65") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth(),
-            isError = pesoErro,
+            isError = state.pesoErro,
             colors = textFieldBlackColors
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         OutlinedTextField(
-            value = altura,
-            onValueChange = { viewModel.atualizarAltura(it) },
+            value = state.altura,
+            onValueChange = viewModel::atualizarAltura,
             label = { Text("Altura (cm)") },
             placeholder = { Text("ex: 170") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth(),
-            isError = alturaErro,
+            isError = state.alturaErro,
             colors = textFieldBlackColors
         )
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        if (mensagem.isNotEmpty()) {
+        state.mensagemErro?.let { mensagem ->
             Text(
                 text = mensagem,
-                color = if (pesoErro || alturaErro) MaterialTheme.colorScheme.error else Color.Gray,
+                color = MaterialTheme.colorScheme.error,
                 style = MaterialTheme.typography.bodySmall
             )
         }
@@ -81,7 +87,7 @@ fun IMCScreen(
         Spacer(modifier = Modifier.height(12.dp))
 
         Button(
-            onClick = { viewModel.calcular(onResultado) },
+            onClick = { viewModel.calcular() },
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFA0EAB3)

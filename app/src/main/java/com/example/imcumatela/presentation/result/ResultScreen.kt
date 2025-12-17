@@ -1,4 +1,4 @@
-package com.example.imcumatela.presentation
+package com.example.imcumatela.presentation.result
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -10,13 +10,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Text
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.example.imcumatela.R
+import com.example.imcumatela.viewmodel.IMCViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ResultadoScreen(imc: Double, categoria: String, onBack: () -> Unit) {
+fun ResultadoScreen(
+    viewModel: IMCViewModel,
+    onBack: () -> Unit
+) {
+    val state by viewModel.uiState.collectAsState()
+
+    val imc = state.imc ?: return
+    val categoria = state.categoria
 
     val cor = when (categoria) {
         "Baixo peso" -> Color(0xFF8AD6BC)
