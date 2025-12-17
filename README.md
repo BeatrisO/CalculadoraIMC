@@ -14,16 +14,20 @@ O usuário informa o peso e a altura, e o app exibe tanto o valor do IMC quanto 
 * Exibi classificação (baixo peso, normal, sobrepeso, obesidade)
 * Interface simples e intuitiva
 * Código claro, organizado e fácil de manter
+* Navegação entre telas utilizando Jetpack Navigation Compose
+* Gerenciamento de estado com StateFlow
 
 ### Tecnologias utilizadas
 
 * Kotlin
 * Android Studio
-* ViewBinding
+* Jetpack Compose
+* ViewModel
+* StateFlow
+* Navigation Compose
 
 ### Melhorias Futuras
 
 * Tela de histórico de IMCs calculados 
 * Tema claro/escuro
-* Interface redesenhada com Jetpack Compose
 * Salvamento local com Room
