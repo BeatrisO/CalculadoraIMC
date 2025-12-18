@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.imcumatela.presentation.result.ImcUiEvent
 import com.example.imcumatela.viewmodel.IMCViewModel
+import com.seuprojeto.ui.theme.textFieldColors
 
 @Composable
 fun IMCScreen(
@@ -30,18 +31,6 @@ fun IMCScreen(
          }
      }
 
-     val textFieldBlackColors = OutlinedTextFieldDefaults.colors(
-        focusedBorderColor = Color.Black,
-        unfocusedBorderColor = Color.Black,
-        cursorColor = Color.Black,
-        focusedLabelColor = Color.Black,
-        unfocusedLabelColor = Color.Black,
-        focusedTextColor = Color.Black,
-        unfocusedTextColor = Color.Black,
-        focusedPlaceholderColor = Color.Black,
-        unfocusedPlaceholderColor = Color.Black
-    )
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -58,7 +47,7 @@ fun IMCScreen(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth(),
             isError = state.pesoErro,
-            colors = textFieldBlackColors
+            colors = textFieldColors()
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -71,7 +60,7 @@ fun IMCScreen(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth(),
             isError = state.alturaErro,
-            colors = textFieldBlackColors
+            colors = textFieldColors()
         )
 
         Spacer(modifier = Modifier.height(12.dp))
