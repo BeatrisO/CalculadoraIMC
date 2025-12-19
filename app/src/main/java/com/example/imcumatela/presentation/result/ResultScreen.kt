@@ -91,7 +91,7 @@ fun ResultadoScreen(
             Button(
                 onClick = onBack,
                 shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFA0EAB3))
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF8FAB96))
             ) {
                 Text("Voltar", color = Color.Black)
             }

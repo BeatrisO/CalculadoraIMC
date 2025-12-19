@@ -1,5 +1,7 @@
 package com.example.imcumatela.presentation.imc
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
@@ -7,9 +9,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.imcumatela.R
 import com.example.imcumatela.presentation.result.ImcUiEvent
 import com.example.imcumatela.viewmodel.IMCViewModel
 import com.seuprojeto.ui.theme.textFieldColors
@@ -34,10 +39,21 @@ fun IMCScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
             .padding(24.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        Image(
+            painter = painterResource(id = R.drawable.logo),
+            contentDescription = "Ilustração Logo",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
+                .offset(y = (-100).dp),
+            contentScale = ContentScale.Fit
+        )
 
         OutlinedTextField(
             value = state.peso,
@@ -79,7 +95,7 @@ fun IMCScreen(
             onClick = { viewModel.calcular() },
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFFA0EAB3)
+                containerColor = Color(0xFF8FAB96)
             )
         ) {
             Text("Calcular IMC", color = Color.Black)
