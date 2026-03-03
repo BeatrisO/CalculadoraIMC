@@ -6,11 +6,11 @@ import androidx.activity.compose.setContent
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.compose.material3.MaterialTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.imcumatela.presentation.imc.IMCScreen
 import com.example.imcumatela.presentation.result.ResultadoScreen
 import com.example.imcumatela.viewmodel.IMCViewModel
+import com.seuprojeto.ui.theme.ImcTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MaterialTheme {
+            ImcTheme {
                 val navController = rememberNavController()
                 val imcViewModel: IMCViewModel = viewModel()
 
