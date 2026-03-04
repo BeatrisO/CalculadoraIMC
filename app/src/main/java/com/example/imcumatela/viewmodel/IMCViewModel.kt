@@ -6,6 +6,7 @@ import com.example.imcumatela.presentation.result.ImcUiEvent
 import com.example.imcumatela.presentation.imc.ImcUiState
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,14 +15,14 @@ import kotlinx.coroutines.launch
 
 class IMCViewModel : ViewModel() {
 
-    private val State = MutableStateFlow(ImcUiState())
-    val uiState: StateFlow<ImcUiState> = State.asStateFlow()
+    private val _uiState = MutableStateFlow(ImcUiState())
+    val uiState: StateFlow<ImcUiState> = _uiState.asStateFlow()
 
     private val _uiEvent = MutableSharedFlow<ImcUiEvent>()
-    val uiEvent = _uiEvent.asSharedFlow()
+    val uiEvent: SharedFlow<ImcUiEvent> = _uiEvent.asSharedFlow()
 
     fun atualizarPeso(valor: String) {
-        State.update {
+        _uiState.update {
             it.copy(
                 peso = valor,
                 pesoErro = false,
@@ -31,7 +32,7 @@ class IMCViewModel : ViewModel() {
     }
 
     fun atualizarAltura(valor: String) {
-        State.update {
+        _uiState.update {
             it.copy(
                 altura = valor,
                 alturaErro = false,
@@ -41,7 +42,7 @@ class IMCViewModel : ViewModel() {
     }
 
     fun calcular() {
-        val state = State.value
+        val state = _uiState.value
 
         val pesoStr = state.peso
         val alturaStr = state.altura
@@ -50,7 +51,7 @@ class IMCViewModel : ViewModel() {
         val alturaErro = alturaStr.isBlank()
 
         if (pesoErro || alturaErro) {
-            State.update {
+            _uiState.update {
                 it.copy(
                     pesoErro = pesoErro,
                     alturaErro = alturaErro,
@@ -68,7 +69,7 @@ class IMCViewModel : ViewModel() {
         val alturaCm = alturaStr.replace(",", ".").toDoubleOrNull()
 
         if (peso == null) {
-            State.update {
+            _uiState.update {
                 it.copy(
                     pesoErro = true,
                     mensagemErro = "Peso inválido"
@@ -78,7 +79,7 @@ class IMCViewModel : ViewModel() {
         }
 
         if (alturaCm == null) {
-            State.update {
+            _uiState.update {
                 it.copy(
                     alturaErro = true,
                     mensagemErro = "Altura inválida"
@@ -97,7 +98,7 @@ class IMCViewModel : ViewModel() {
             else -> "Obesidade"
         }
 
-        State.update {
+        _uiState.update {
             it.copy(
                 imc = imc,
                 categoria = categoria,
@@ -115,4 +116,3 @@ class IMCViewModel : ViewModel() {
         }
     }
 }
-
