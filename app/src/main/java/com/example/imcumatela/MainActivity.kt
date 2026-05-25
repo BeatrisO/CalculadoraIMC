@@ -7,8 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.imcumatela.presentation.imc.IMCScreen
-import com.example.imcumatela.presentation.result.ResultadoScreen
+import com.example.imcumatela.presentation.screens.calculation.IMCScreen
+import com.example.imcumatela.presentation.screens.result.ResultadoScreen
 import com.example.imcumatela.viewmodel.IMCViewModel
 import com.seuprojeto.ui.theme.ImcTheme
 

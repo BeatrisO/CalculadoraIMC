@@ -1,4 +1,4 @@
-package com.example.imcumatela.presentation.imc
+package com.example.imcumatela.presentation.screens.calculation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -15,7 +15,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.imcumatela.R
-import com.example.imcumatela.presentation.result.ImcUiEvent
+import com.example.imcumatela.presentation.screens.result.ImcUiEvent
 import com.example.imcumatela.viewmodel.IMCViewModel
 import com.seuprojeto.ui.theme.textFieldColors
 

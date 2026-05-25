@@ -1,4 +1,4 @@
-package com.example.imcumatela.presentation.imc
+package com.example.imcumatela.presentation.screens.calculation
 
 data class ImcUiState(
     val peso: String = "",

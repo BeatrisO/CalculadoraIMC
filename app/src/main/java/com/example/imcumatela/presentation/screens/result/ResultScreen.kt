@@ -1,4 +1,4 @@
-package com.example.imcumatela.presentation.result
+package com.example.imcumatela.presentation.screens.result
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*

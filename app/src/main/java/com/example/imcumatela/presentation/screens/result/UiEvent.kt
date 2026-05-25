@@ -1,4 +1,4 @@
-package com.example.imcumatela.presentation.result
+package com.example.imcumatela.presentation.screens.result
 
 sealed interface ImcUiEvent {
     data class NavigateToResultado(
