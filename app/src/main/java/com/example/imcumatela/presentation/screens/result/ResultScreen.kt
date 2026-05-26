@@ -15,7 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.example.imcumatela.R
-import com.example.imcumatela.viewmodel.IMCViewModel
+import com.example.imcumatela.presentation.screens.calculation.IMCViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

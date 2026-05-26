@@ -9,7 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.imcumatela.presentation.screens.calculation.IMCScreen
 import com.example.imcumatela.presentation.screens.result.ResultadoScreen
-import com.example.imcumatela.viewmodel.IMCViewModel
+import com.example.imcumatela.presentation.screens.calculation.IMCViewModel
 import com.seuprojeto.ui.theme.ImcTheme
 
 class MainActivity : ComponentActivity() {

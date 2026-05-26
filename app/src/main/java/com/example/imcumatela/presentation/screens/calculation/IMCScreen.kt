@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.imcumatela.R
 import com.example.imcumatela.presentation.screens.result.ImcUiEvent
-import com.example.imcumatela.viewmodel.IMCViewModel
+import com.example.imcumatela.presentation.screens.calculation.IMCViewModel
 import com.seuprojeto.ui.theme.textFieldColors
 
 @Composable
