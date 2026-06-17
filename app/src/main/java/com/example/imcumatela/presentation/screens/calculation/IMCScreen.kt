@@ -22,19 +22,21 @@ import com.seuprojeto.ui.theme.textFieldColors
 @Composable
 fun IMCScreen(
     viewModel: IMCViewModel = viewModel(),
-    onNavigateResultado: () -> Unit
+    onNavigateResultado: () -> Unit,
+    onNavigateHistory: () -> Unit
 ) {
+
     val state by viewModel.uiState.collectAsState()
 
-     LaunchedEffect(Unit) {
-         viewModel.uiEvent.collect { event ->
-             when (event) {
-                 is ImcUiEvent.NavigateToResultado -> {
-                     onNavigateResultado()
-                 }
-             }
-         }
-     }
+    LaunchedEffect(Unit) {
+        viewModel.uiEvent.collect { event ->
+            when (event) {
+                is ImcUiEvent.NavigateToResultado -> {
+                    onNavigateResultado()
+                }
+            }
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -58,9 +60,15 @@ fun IMCScreen(
         OutlinedTextField(
             value = state.peso,
             onValueChange = viewModel::atualizarPeso,
-            label = { Text("Peso (kg)") },
-            placeholder = { Text("ex: 65") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            label = {
+                Text("Peso (kg)")
+            },
+            placeholder = {
+                Text("ex: 65")
+            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number
+            ),
             modifier = Modifier.fillMaxWidth(),
             isError = state.pesoErro,
             colors = textFieldColors()
@@ -71,9 +79,15 @@ fun IMCScreen(
         OutlinedTextField(
             value = state.altura,
             onValueChange = viewModel::atualizarAltura,
-            label = { Text("Altura (cm)") },
-            placeholder = { Text("ex: 170") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            label = {
+                Text("Altura (cm)")
+            },
+            placeholder = {
+                Text("ex: 170")
+            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number
+            ),
             modifier = Modifier.fillMaxWidth(),
             isError = state.alturaErro,
             colors = textFieldColors()
@@ -92,13 +106,28 @@ fun IMCScreen(
         Spacer(modifier = Modifier.height(12.dp))
 
         Button(
-            onClick = { viewModel.calcular() },
+            onClick = {
+                viewModel.calcular()
+            },
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF8FAB96)
             )
         ) {
-            Text("Calcular IMC", color = Color.Black)
+
+            Text(
+                "Calcular IMC",
+                color = Color.Black
+            )
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Button(
+            onClick = onNavigateHistory,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Ver histórico")
         }
     }
 }
