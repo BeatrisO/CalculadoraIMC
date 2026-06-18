@@ -32,6 +32,9 @@ class MainActivity : ComponentActivity() {
                             viewModel = imcViewModel,
                             onNavigateResultado = {
                                 navController.navigate("resultado")
+                            },
+                            onNavigateHistory = {
+                                navController.navigate("history")
                             }
                         )
                     }
@@ -39,10 +42,10 @@ class MainActivity : ComponentActivity() {
                     composable("resultado") {
                         ResultadoScreen(
                             viewModel = imcViewModel,
-                            onBack = { navController.popBackStack() }
+                            onBack = {navController.popBackStack()
+                            }
                         )
                     }
-
                     composable("history") {
                         HistoryScreen()
                     }
@@ -51,4 +54,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
