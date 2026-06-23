@@ -34,19 +34,20 @@ class MainActivity : ComponentActivity() {
                                 navController.navigate("resultado")
                             },
                             onNavigateHistory = {
-                                navController.navigate("history")
+                                navController.navigate("historico")
                             }
                         )
                     }
-
                     composable("resultado") {
                         ResultadoScreen(
                             viewModel = imcViewModel,
-                            onBack = {navController.popBackStack()
+
+                            onBack = {
+                                navController.popBackStack()
                             }
                         )
                     }
-                    composable("history") {
+                    composable("historico") {
                         HistoryScreen()
                     }
                 }
